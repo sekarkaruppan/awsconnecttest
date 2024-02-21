@@ -13,6 +13,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           m_aws_secretkey-id: ${{ secrets.M_AWS_SECRETKEY_ID }}
+          to access S3 bucket key: ${{ secrets.to access S3 bucket key }}
           aws-region: us-east-1
       - name: copy files to S3 bucket
         run: |
