@@ -1,4 +1,4 @@
-name: Push to S3
+name: Push to meena418
 
 on: 
   workflow_dispatch:
