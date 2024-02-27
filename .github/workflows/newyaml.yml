@@ -1,0 +1,39 @@
+name: Push to S3
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup AWS CLI
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.M_AWS_SECRETKEY_ID }}
+          aws-secret-access-key: ${{ secrets.TO_ACCESS_S3_BUCKET_KEY }}
+          aws-region: us-east-1
+      - name: copy files to S3 bucket
+        run: |
+          aws s3 cp index.html "s3://sekars3awsbucket/"
+Resources:
+  MyS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: Private
+      BucketName: sekars3awsbucket
+
+  MyBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket:!Ref MyS3Bucket
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal: '*'
+            Action:
+              - 's3:GetObject'
+            Resource: !Sub "arn:aws:s3:::sekars3awsbucket/*"
