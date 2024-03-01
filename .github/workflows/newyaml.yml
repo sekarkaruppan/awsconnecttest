@@ -7,7 +7,6 @@ jobs:
   deploy:
     runs-on:  self-hosted
     steps:
-      - name: display
-        run: |
+       - run: |
           echo "heloo"
           echo "heloo222"
