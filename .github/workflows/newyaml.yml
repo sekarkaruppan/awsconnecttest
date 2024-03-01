@@ -5,7 +5,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on:  self-hosted
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -17,23 +17,4 @@ jobs:
           aws-region: us-east-1
       - name: copy files to S3 bucket
         run: |
-          aws s3 cp index.html "s3://sekars3awsbucket/"
-Resources:
-  MyS3Bucket:
-    Type: AWS::S3::Bucket
-    Properties:
-      AccessControl: Private
-      BucketName: sekars3awsbucket
-
-  MyBucketPolicy:
-    Type: AWS::S3::BucketPolicy
-    Properties:
-      Bucket:!Ref MyS3Bucket
-      PolicyDocument:
-        Version: '2012-10-17'
-        Statement:
-          - Effect: Allow
-            Principal: '*'
-            Action:
-              - 's3:GetObject'
-            Resource: !Sub "arn:aws:s3:::sekars3awsbucket/*"
+          echo "heloo"
