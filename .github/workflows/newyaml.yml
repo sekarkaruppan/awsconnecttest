@@ -1,7 +1,7 @@
 name: Push to sekar
 
 on: 
-  workflow_dispatch:
+  push:
 
 jobs:
   deploy:
@@ -9,4 +9,4 @@ jobs:
     steps:
        - run: |
           echo "heloo"
-          echo "heloo222"
+          echo "helooxxxx"
